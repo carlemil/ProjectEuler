@@ -1,0 +1,9 @@
+#By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+
+#What is the 10001st prime number?
+
+import tools
+p=1
+for a in range(0,10001):
+	p = tools.next_prime(p)
+print p
