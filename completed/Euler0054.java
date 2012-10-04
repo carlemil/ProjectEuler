@@ -42,6 +42,7 @@ import java.util.ArrayList;
 public class Euler0054 {
 
     public static void main(String[] args) {
+        long time = System.currentTimeMillis();
 
         ArrayList<String> numerals = new ArrayList<String>();
         Tools.readStringListFromFile("completed/euler0054_poker.txt", numerals);
@@ -70,6 +71,7 @@ public class Euler0054 {
             }
         }
         System.out.println(c1);
+        System.out.println("time: " + (System.currentTimeMillis() - time) + "ms");
     }
 
     public static boolean isFirstHandBest(Hand h1, Hand h2) {

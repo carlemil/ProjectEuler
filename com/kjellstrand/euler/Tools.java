@@ -3,6 +3,7 @@ package com.kjellstrand.euler;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.regex.Pattern;
@@ -10,6 +11,8 @@ import java.util.regex.Pattern;
 public class Tools {
 
     public static ArrayList<Integer> primeFactors(int numbers) {
+        
+        // for faster-> http://www.math.mtu.edu/mathlab/COURSES/holt/dnt/divis2.html
         int n = numbers;
         ArrayList<Integer> factors = new ArrayList<Integer>();
         for(int i = 2; i <= n / i; i++) {
@@ -154,6 +157,27 @@ public class Tools {
         }
         System.out.println();
     }
+    
+    public static boolean isPalindrome(double l){
+        double length = Math.log10(l) + 1;
+        double halfLength = length / 2;
+        double rpow=1;
+        double lpow= Math.pow(10d, length-1);
+        for(int i=0; i<halfLength; i++){
+            double rpow10 = rpow*10;
+            double lpow10 = lpow*10;
+            
+            double right = l/rpow - (l/rpow10)*10;
+            double left = l/lpow - (l/lpow10)*10;
+
+            if(right!=left){
+                return false;
+            }
+            rpow = rpow10;
+            lpow = lpow/10;
+        }
+        return true;
+    }
 
     /**
      * --- Same method in Python --- def get_primes_low(max): list = [0 for a in range(0, max+1)] for cand in range(2, max+1): for
@@ -234,6 +258,20 @@ public class Tools {
         }
     }
 
+    public static BigInteger reverseBigInt(BigInteger a) {
+        BigInteger b= BigInteger.ZERO;
+        BigInteger t= BigInteger.ONE;
+        BigInteger t2= BigInteger.ONE;
+        t = a;
+        while(!t.equals(BigInteger.ZERO)){
+            t2 = t;
+            t = t.divide(BigInteger.TEN);
+            b=b.multiply(BigInteger.TEN);
+            b=b.add(t2.subtract(t.multiply(BigInteger.TEN)));
+        }
+        return b;
+    }
+
     public static int[][] readInt2DArrayFromFile(String filename, int[][] matrix) {
         try {
             FileReader input = new FileReader(filename);
@@ -266,9 +304,9 @@ public class Tools {
         return matrix;
     }
 
-    public static void printIntArray(double[] peter) {
-        for(int x = 0; x < peter.length; x++) {
-            System.out.print(peter[x] + ", ");
+    public static void printIntArray(double[] d) {
+        for(int x = 0; x < d.length; x++) {
+            System.out.print(d[x] + ", ");
         }
         System.out.println();
     }
