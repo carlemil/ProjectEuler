@@ -29,8 +29,8 @@ package com.kjellstrand.euler;
 public class Euler0265 {
 
     static long count = 0;
-    static final long MASK = 1 + 2 + 4 + 8 ;//+ 16; // a 11111 mask
-    static final long N = 4;
+    static final long MASK = 1 + 2 + 4 + 8 + 16; // a 11111 mask
+    static final long N = 5;
     static final long maxpos = (long) Math.pow(2d, N);
 
     public static void main(String[] args) {
@@ -45,18 +45,17 @@ public class Euler0265 {
 
     public static long check(long circ, long pos, long used) {
         long ret = 0;
-        if (pos >= 31) {
-            System.out.println("used: " + Long.toBinaryString(used));
-            System.out.println("pos: " + pos);
-            System.out.println("circ: " + Long.toBinaryString(circ));
-            System.out.println(pos);
-        }
+
         long maskAtPos = MASK << (pos);
        // System.out.println("  maskAtPos: " + Integer.toBinaryString(maskAtPos));
         
         if (pos >= maxpos) {
-            System.out.println("found one: "+(Long.toBinaryString(Long.reverse(circ)>>48)));
-            return Long.reverse(circ)>>48;
+//            System.out.println("used: " + Long.toBinaryString(used));
+//            System.out.println("pos: " + pos);
+//            System.out.println("circ: " + Long.toBinaryString(circ));
+//            System.out.println(pos);
+            System.out.println("found one: "+(Long.toBinaryString(Long.reverse(circ)>>(64-maxpos))));
+            return Long.reverse(circ)>>(64-maxpos);
         }
         // Check maskAtPos set to 0xy
         long maskedAtPos = circ & maskAtPos;
@@ -64,34 +63,34 @@ public class Euler0265 {
        // System.out.println("maskedAtPos: "+Integer.toBinaryString(maskedAtPos));
         //System.out.println("masked     : "+Integer.toBinaryString(masked));
         
-        if (((1 << masked) & used) == 0) {
+        if (((1l << masked) & used) == 0) {
             // mark used
-            used += (1 << masked);
+            used += (1l << masked);
            // System.out.println("------ 0");
-            ret += check(circ, pos + 1, used);
+            ret += check(circ, pos + 1l, used);
             //System.out.println("------");
-            used -= (1 << masked);
+            used -= (1l << masked);
             // unmark used
         }else{
             //System.out.println("used 0");
         }
         // Check maskAtPos set to 1xy
         // mark used
-        maskedAtPos += 1 << (N + pos - 1);
+        maskedAtPos += 1l << (N + pos - 1l);
         masked = maskedAtPos >> pos;
         //System.out.println("maskedAtPos: "+Integer.toBinaryString(maskedAtPos));
         //System.out.println("masked     : "+Integer.toBinaryString(masked));
         
-        if (((1 << masked) & used) == 0) {
+        if (((1l << masked) & used) == 0) {
             // mark used
-            used += (1 << masked);
-            circ += 1 << (N+pos-1);
+            used += (1l << masked);
+            circ += 1l << (N+pos-1l);
             //System.out.println("------ 1");
-            ret += check(circ, pos + 1, used);
+            ret += check(circ, pos + 1l, used);
             //System.out.println("------");
 
-            used -= (1 << masked);
-            circ -= 1 << (N+pos-1);
+            used -= (1l << masked);
+            circ -= 1l << (N+pos-1l);
 
             // unmark used
         }else{
