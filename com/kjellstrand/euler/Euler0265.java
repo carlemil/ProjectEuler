@@ -34,19 +34,22 @@ public class Euler0265 {
     static final long maxpos = (long) Math.pow(2d, N);
 
     public static void main(String[] args) {
-        long time = System.currentTimeMillis();
-        
-        System.out.println(check(0, 1, 1));
+        long startTime = System.currentTimeMillis();
 
-        System.out.println("time: " + (System.currentTimeMillis() - time) + "ms");
+        long res = check(0, 1, 1);
+
+        long endTime = System.currentTimeMillis();
+
+        System.out.println(res);
+        System.out.println("time: " + (endTime - startTime) + "ms");
     }
 
     public static long check(long circ, long pos, long used) {
         long ret = 0;
         long maskAtPos = MASK << (pos);
-        
+
         if (pos >= maxpos) {
-          return Long.reverse(circ)>>(64-maxpos);
+            return Long.reverse(circ) >> (64 - maxpos);
         }
         long maskedAtPos = circ & maskAtPos;
         long masked = maskedAtPos >> pos;
@@ -59,10 +62,10 @@ public class Euler0265 {
         masked = maskedAtPos >> pos;
         if (((1l << masked) & used) == 0) {
             used += (1l << masked);
-            circ += 1l << (N+pos-1l);
+            circ += 1l << (N + pos - 1l);
             ret += check(circ, pos + 1l, used);
             used -= (1l << masked);
-            circ -= 1l << (N+pos-1l);
+            circ -= 1l << (N + pos - 1l);
         }
         return ret;
     }
