@@ -1,7 +1,9 @@
 
-package com.kjellstrand.euler;
+package completed;
 
 import java.util.HashMap;
+
+import com.kjellstrand.euler.Tools;
 
 //Each character on a computer is assigned a unique code and the preferred 
 //standard is ASCII (American Standard Code for Information Interchange). 
@@ -40,7 +42,7 @@ public class Euler0059 {
                 0, 0, 0
         };
         Integer ints[] = Tools
-                .readIntegersListFromFile("com/kjellstrand/euler/euler0059_cipher1.txt");
+                .readIntegersListFromFile("completed/euler0059_cipher1.txt");
         // keys are 103, 111, 100
         findBestKey(key, 0, ints);
         findBestKey(key, 1, ints);
