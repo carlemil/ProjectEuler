@@ -29,7 +29,7 @@ package completed;
 //- current player moves to (0,0,1)
 //- opponent moves to (0,0,0), and so wins.
 //
-//For how many positive integers n 230 does X(n,2n,3n) = 0 ?
+//For how many positive integers n  230 does X(n,2n,3n) = 0 ?
 
 public class Euler0301 {
     static int[] a;
