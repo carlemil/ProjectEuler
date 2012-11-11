@@ -1,5 +1,5 @@
 
-package com.kjellstrand.euler;
+package completed;
 
 /*
  2^N binary digits can be placed in a circle so that all 
