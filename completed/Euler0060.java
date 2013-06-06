@@ -1,9 +1,11 @@
-package com.kjellstrand.euler;
+package completed;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
+
+import com.kjellstrand.euler.Tools;
 
 // The primes 3, 7, 109, and 673, are quite remarkable.
 // By taking any two primes and concatenating them in any
@@ -21,9 +23,6 @@ public class Euler0060 {
 
     public static void main(String[] args) {
         long time = System.currentTimeMillis();
-
-        // for 5 nestlade loopar som inte överlappar, 2 börjar där 1 slutar osv.
-        // kolla om a+b b+a osv finns i hashmap/primelist
 
         int max = 100000000;
         Vector<Integer> primeList = Tools.getPrimes(max);

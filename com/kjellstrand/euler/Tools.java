@@ -249,7 +249,6 @@ public class Tools {
      * @return boolean true if n is prime
      */
     public static boolean isPrime(long n) {
-        //System.out.println("p: "+n);
         if (n < 0) {
             n = n * -1;
         }
