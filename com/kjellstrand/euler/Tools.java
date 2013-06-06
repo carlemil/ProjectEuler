@@ -221,6 +221,7 @@ public class Tools {
      * @return Vector of al the primes in the range 0 .. max
      */
     public static Vector<Integer> getPrimes(int max) {
+        System.out.println("Getting first " + max + " primes in a vector.");
         boolean[] list = new boolean[max + 1];
         for (int i = 0; i < max + 1; i++) {
             list[i] = false;
@@ -248,6 +249,7 @@ public class Tools {
      * @return boolean true if n is prime
      */
     public static boolean isPrime(long n) {
+        //System.out.println("p: "+n);
         if (n < 0) {
             n = n * -1;
         }
