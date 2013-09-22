@@ -34,7 +34,7 @@ public class Euler0128 {
 		long time = System.currentTimeMillis();
 
 		primes = new long[expectedMaxPrime];
-		Vector<Integer> primVect = Tools.getPrimes(expectedMaxPrime);
+		Vector<Integer> primVect = Tools.getPrimesVector(expectedMaxPrime);
 		for(int i = 0; i<primVect.size(); i++){
 			primes[primVect.get(i)] = 1;
 		}

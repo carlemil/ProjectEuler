@@ -20,7 +20,7 @@ public class Euler0187 {
         Long problemSize = 100000000l;
         // 17 427 258
         Long maxPrime = problemSize / 2;
-        Integer[] iprimes = Tools.getPrimes(maxPrime.intValue()).toArray(new Integer[0]);
+        Integer[] iprimes = Tools.getPrimesVector(maxPrime.intValue()).toArray(new Integer[0]);
         Long primes[] = new Long[iprimes.length];
         for (int i = 0; i < iprimes.length; i++) {
             primes[i] = new Long(iprimes[i]);

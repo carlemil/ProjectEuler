@@ -25,7 +25,7 @@ public class Euler0046 {
     public static void main(String[] args) {
         long time = System.currentTimeMillis();
 
-        primes = Tools.getPrimes(5000);
+        primes = Tools.getPrimesVector(5000);
 
         int i = 9;
         while (goldbachTest(i)) {

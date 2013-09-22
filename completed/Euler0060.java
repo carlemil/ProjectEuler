@@ -25,7 +25,7 @@ public class Euler0060 {
         long time = System.currentTimeMillis();
 
         int max = 100000000;
-        Vector<Integer> primeList = Tools.getPrimes(max);
+        Vector<Integer> primeList = Tools.getPrimesVector(max);
         System.out.println("Got primelist");
         
         for (Integer i: primeList){

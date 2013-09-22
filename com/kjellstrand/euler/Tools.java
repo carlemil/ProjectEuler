@@ -1,4 +1,3 @@
-
 package com.kjellstrand.euler;
 
 import java.io.BufferedReader;
@@ -11,31 +10,31 @@ import java.util.regex.Pattern;
 
 public class Tools {
 
-	public static boolean isBouncy(long number) {
+    public static boolean isBouncy(long number) {
 
-		long dir = 0;
-		long prevD = number - ((number / 10) * 10);
-		long d = prevD;
-		long prevDir = 0;
-		long tmp = 0;
+        long dir = 0;
+        long prevD = number - ((number / 10) * 10);
+        long d = prevD;
+        long prevDir = 0;
+        long tmp = 0;
 
-		while (number > 0) {
-			prevD = d;
-			d = number - ((number / 10) * 10);
-			tmp = prevD - d;
+        while (number > 0) {
+            prevD = d;
+            d = number - ((number / 10) * 10);
+            tmp = prevD - d;
 
-			if (tmp != 0) {
-				prevDir = dir;
-				dir = tmp;
-			}
+            if (tmp != 0) {
+                prevDir = dir;
+                dir = tmp;
+            }
 
-			if (dir > 0 && prevDir < 0 || dir < 0 && prevDir > 0) {
-				return true;
-			}
-			number /= 10;
-		}
-		return false;
-	}
+            if (dir > 0 && prevDir < 0 || dir < 0 && prevDir > 0) {
+                return true;
+            }
+            number /= 10;
+        }
+        return false;
+    }
 
     public static ArrayList<Integer> primeFactors(int numbers) {
 
@@ -211,17 +210,8 @@ public class Tools {
         return true;
     }
 
-    /**
-     * --- Same method in Python --- def get_primes_low(max): list = [0 for a in
-     * range(0, max+1)] for cand in range(2, max+1): for not_prime in
-     * range(cand*2, max+1, cand): list[not_prime] = 1 ret_list = [] for pos in
-     * range(2,max+1): if list[pos] == 0: ret_list.append(pos) return ret_list
-     * 
-     * @param max
-     * @return Vector of al the primes in the range 0 .. max
-     */
-    public static Vector<Integer> getPrimes(int max) {
-        System.out.println("Getting first " + max + " primes in a vector.");
+    public static Vector<Integer> getPrimesVector(int max) {
+        System.out.println("Getting primes in a vector.");
         boolean[] list = new boolean[max + 1];
         for (int i = 0; i < max + 1; i++) {
             list[i] = false;
@@ -240,14 +230,42 @@ public class Tools {
         return ret_v;
     }
 
-    /*
-     * def is_prime(a): a = abs(a) if a == 1: return False if a==2 or a==3 or
+    public static int[] getPrimesIntArray(int max) {
+        System.out.println("Getting primes in a int array.");
+        boolean[] list = new boolean[max + 1];
+        for (int i = 0; i < max + 1; i++) {
+            list[i] = false;
+        }
+        for (int c = 2; c < max + 1; c++) {
+            for (int not_prime = c * 2; not_prime < max + 1; not_prime += c) {
+                list[not_prime] = true;
+            }
+        }
+        int nbrOfPs = 0;
+        for (int i = 0; i < max; i++) {
+            if (!list[i]) {
+                nbrOfPs++;
+            }
+        }
+
+        int i=0;
+        int[] ret = new int[nbrOfPs];
+        for (int pos = 2; pos < max + 1; pos++) {
+            if (list[pos] == false) {
+                ret[i++] = pos;
+            }
+        }
+        return ret;
+    }
+
+    /* def is_prime(a): a = abs(a) if a == 1: return False if a==2 or a==3 or
      * a==5: return True if a%2==0 or a%3==0 or a%5==0: return False i = 5 asqrt
      * = int(math.sqrt(a)) while i < asqrt: i += 2 if a % i == 0: return False i
      * += 4 if a % i == 0: return False return True
+     * 
      * @param n
-     * @return boolean true if n is prime
-     */
+     * 
+     * @return boolean true if n is prime */
     public static boolean isPrime(long n) {
         if (n < 0) {
             n = n * -1;

@@ -40,7 +40,7 @@ public class Euler0216 {
 		long time = System.currentTimeMillis();
 
 		primes = new int[expectedMaxPrime];
-		Vector<Integer> primVect = Tools.getPrimes(expectedMaxPrime);
+		Vector<Integer> primVect = Tools.getPrimesVector(expectedMaxPrime);
 		for(int i = 0; i<primVect.size(); i++){
 			primes[primVect.get(i)] = 1;
 		}
