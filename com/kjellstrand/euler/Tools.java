@@ -248,11 +248,39 @@ public class Tools {
             }
         }
 
-        int i=0;
-        int[] ret = new int[nbrOfPs];
+        int i = 0;
+        int[] ret = new int[nbrOfPs - 2];
         for (int pos = 2; pos < max + 1; pos++) {
             if (list[pos] == false) {
                 ret[i++] = pos;
+            }
+        }
+        return ret;
+    }
+
+    public static int[] getPrimesIntArray(int min, int max) {
+        System.out.println("Getting primes in a int array.");
+        boolean[] list = new boolean[max + 1 - min];
+        
+        for (int c = 2; c < max - min + 1; c++) {
+            // opti : om c redan är markerad true i list kan vi hoppa vidare
+            int start = (min / c + 1) * c;
+            for (int not_prime = start; not_prime < max + 1; not_prime += c) {
+                list[not_prime - min] = true;
+            }
+        }
+        int nbrOfPs = 0;
+        for (int i = 0; i < max - min + 1; i++) {
+            if (!list[i]) {
+                nbrOfPs++;
+            }
+        }
+
+        int i = 0;
+        int[] ret = new int[nbrOfPs ];
+        for (int pos = 0; pos < max - min + 1; pos++) {
+            if (list[pos] == false) {
+                ret[i++] = pos + min;
             }
         }
         return ret;
