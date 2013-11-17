@@ -10,7 +10,7 @@ package com.kjellstrand.euler;
     The tour ends in the bottom left corner.
     The diagram shows one tour over a 4 × 10 board:
 
-    T(10) is 2329. What is T(1012) modulo 108?
+    T(10) is 2329. What is T(10^12) modulo 10^8?
  */
 
 public class Euler0237 {

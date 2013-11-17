@@ -258,32 +258,13 @@ public class Tools {
         return ret;
     }
 
-    public static int[] getPrimesIntArray(int min, int max) {
-        System.out.println("Getting primes in a int array.");
-        boolean[] list = new boolean[max + 1 - min];
-        
-        for (int c = 2; c < max - min + 1; c++) {
-            // opti : om c redan är markerad true i list kan vi hoppa vidare
-            int start = (min / c + 1) * c;
-            for (int not_prime = start; not_prime < max + 1; not_prime += c) {
-                list[not_prime - min] = true;
-            }
-        }
-        int nbrOfPs = 0;
-        for (int i = 0; i < max - min + 1; i++) {
-            if (!list[i]) {
-                nbrOfPs++;
-            }
-        }
-
-        int i = 0;
-        int[] ret = new int[nbrOfPs ];
-        for (int pos = 0; pos < max - min + 1; pos++) {
-            if (list[pos] == false) {
-                ret[i++] = pos + min;
-            }
-        }
-        return ret;
+    public static boolean isPrime(BigInteger p) {
+        int certainty = 10;
+        return p.isProbablePrime(certainty );
+    }
+    
+    public static boolean isPrimeRegexp(int n) {
+        return !new String(new char[n]).matches(".?|(..+?)\\1+");
     }
 
     /* def is_prime(a): a = abs(a) if a == 1: return False if a==2 or a==3 or
@@ -437,4 +418,14 @@ public class Tools {
         }
         return integers.toArray(new Integer[0]);
     }
+    
+
+    public static long concatIntArray(int[] digits) {
+        long r = 0;
+        for (int i = 0; i < digits.length; i++) {
+            r = digits[i] + r * 10;
+        }
+        return r;
+    }
+
 }
