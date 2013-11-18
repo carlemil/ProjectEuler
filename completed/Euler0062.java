@@ -14,13 +14,15 @@ import java.util.HashMap;
 public class Euler0062 {
 
     static HashMap<String, Pair<Long, Integer>> map = new HashMap<String, Pair<Long, Integer>>();
+    static final int PERMS = 5;
 
     public static void main(String[] args) {
         long time = System.currentTimeMillis();
-
         boolean search = true;
+        boolean candidateFound = false;
+        int prevLength = 0;
         int q = 1;
-        Long q3 = new Long(0);
+        Long q3 = new Long(Long.MAX_VALUE);
         while (search) {
             q3 = (long) Math.pow(q++, 3);
             char[] q3ca = q3.toString().toCharArray();
@@ -28,15 +30,25 @@ public class Euler0062 {
             String s = Arrays.toString(q3ca);
             if(map.containsKey(s)){
                 Pair<Long, Integer> pair = map.get(s);
-                if (++pair.count == 5) {
-                    System.out.println(pair.number);
-                    search = false;
+                if (++pair.count == PERMS) {
+                    candidateFound = true;
                 }
             } else {
                 map.put(s, new Pair<Long, Integer>(q3,1));
             }
+            if (candidateFound && prevLength != s.length()) {
+                search = false;
+            }
+            prevLength = s.length();
         }
 
+        Long n = Long.MAX_VALUE;
+        for (Pair<Long, Integer> p : map.values()) {
+            if (p.count == PERMS && p.number < n) {
+                n = p.number;
+            }
+        }
+        System.out.println(n);
         System.out.println("time: " + (System.currentTimeMillis() - time) + "ms");
     }
 }
