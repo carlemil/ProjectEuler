@@ -33,61 +33,71 @@ public class Euler0061 {
     private static final List<Integer[]>[] mArrayList = new ArrayList[100];
     private static final boolean mSearched[] = new boolean[6];
     private static int mFirst = 0;
-    private static int mDepth = 0;
 
     public static void main(String[] args) {
         long time = System.currentTimeMillis();
 
-        for (int i = 44; i < 142; i++) {
-            setData(0, (int) Tools.getTriangle(i));
+        for (int i = 1; i < 142; i++) {
+            // setData(0, (int) Tools.getTriangle(i));
             setData(1, (int) Tools.getSquare(i));
             setData(2, (int) Tools.getPentagonal(i));
-            // setData(3, (int) Tools.getHexagonal(i));
-            // setData(4, (int) Tools.getHeptagonal(i));
-            // setData(5, (int) Tools.getOctagonal(i));
+            setData(3, (int) Tools.getHexagonal(i));
+            setData(4, (int) Tools.getHeptagonal(i));
+            setData(5, (int) Tools.getOctagonal(i));
         }
 
         // Search through the data.
         int res = 0;
-        for (int n = 10; n < 100; n++) {
-            res = search(1000 + n);
+        for (int n = 1; n < 142; n++) {
+            int t = (int) Tools.getTriangle(n);
+            if (t >= 1000 && t < 10000) {
+                mSearched[0] = true;
+                mFirst = getFirstTwoDigits(t);
+                System.out.println("mFirst: " + mFirst);
+                System.out.println("depth: " + 0 + " - type " + 0 + " - n " + t);
+
+                res = search(t, 1);
+                if (res != 0) {
+                    res += t;
+                    System.out.println("depth: " + 0 + " - type " + 0 + " - n " + t + " - res "
+                            + res);
+                    break;
+                }
+            }
         }
         System.out.println(res);
         System.out.println("time: " + (System.currentTimeMillis() - time) + "ms");
     }
 
-    private static int search(int n) {
-        int f = getFirstTwoDigits(n);
+    private static int search(int n, int depth) {
         int l = getLastTwoDigits(n);
-        if (mDepth == 1) {
-            mFirst = f;
-        }
+
         List<Integer[]> list = mArrayList[l];
-        mDepth++;
-        if (list == null) {
-            mDepth--;
-            return 0;
-        } else {
+        if (list != null) {
+
             for (Integer[] array : list) {
                 if (!mSearched[array[0]]) {
-                    // System.out.println("-- " + array[1]);
-                    if (mDepth >= 2) {// && l == mFirst) {
-                        System.out.println("---------------- ");
-                        return n;
+                    System.out.println("depth: " + depth + " - type " + array[0] + " - n " + array[1]);
+                    int last = getLastTwoDigits(array[1]);
+                    if (depth >= 5 && last == mFirst) {
+                        System.out.println("---------------- " + array[1] + " last: " + last);
+                        return array[1];
                     } else {
                         mSearched[array[0]] = true;
-                        int ret = search(array[1]);
+                        int ret = search(array[1], depth + 1);
                         if (ret != 0) {
-                            System.out.println("--+++  " + ret);
+                            System.out.println("depth: " + depth + " - type " + array[0] + " - n " + array[1]
+                                    + " - res "
+                                    + (array[1] + ret));
+                            return array[1] + ret;
                         }
                         mSearched[array[0]] = false;
                     }
                 }
             }
-            System.out.println();
-            mDepth--;
-            return 0;
         }
+        System.out.println();
+        return 0;
     }
 
     private static void setData(int type, int n) {
@@ -101,7 +111,6 @@ public class Euler0061 {
             Integer[] array = new Integer[2];
             array[0] = type;
             array[1] = n;
-            // array[2] = getLastTwoDigits(n);
             list.add(array);
         }
     }
