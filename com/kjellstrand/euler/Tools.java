@@ -88,9 +88,34 @@ public class Tools {
         return distinctFactors;
     }
 
+    public static long getTriangle(long n) {
+        // P3,n=n(n+1)/2 1, 3, 6, 10, 15, ...
+        return n * (n + 1) / 2;
+    }
+
+    public static long getSquare(long n) {
+        // P4,n=n2 1, 4, 9, 16, 25, ...
+        return n * n;
+    }
+
     public static long getPentagonal(long n) {
-        // Pn=n(3n-1)/2
-        return (n * (n + (n << 1) - 1)) >> 1;
+        // P5,n=n(3n−1)/2 1, 5, 12, 22, 35, ...
+        return n * (3 * n - 1) / 2;
+    }
+
+    public static long getHexagonal(long n) {
+        // P6,n=n(2n−1) 1, 6, 15, 28, 45, ...
+        return n * (2 * n - 1);
+    }
+
+    public static long getHeptagonal(long n) {
+        // P7,n=n(5n−3)/2 1, 7, 18, 34, 55, ...
+        return n * (5 * n - 3) / 2;
+    }
+
+    public static long getOctagonal(long n) {
+        // P8,n=n(3n−2) 1, 8, 21, 40, 65, ...
+        return n * (3 * n - 2);
     }
 
     public static void get9HeadOfNthFibonacci(int n) {
