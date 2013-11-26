@@ -56,7 +56,7 @@ public class Euler0062 {
 class Pair<T1, T2> {
     public Long number = 0l;
     public Integer count = 0;
-    
+
     public Pair(T1 number, T2 count) {
         this.number = (Long) number;
         this.count = (Integer) count;
