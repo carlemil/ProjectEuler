@@ -43,21 +43,21 @@ public class Euler0061 {
         long time = System.currentTimeMillis();
 
         for (int i = 1; i < 142; i++) {
-            // setData(0, (int) Tools.getTriangle(i));
+            setData(0, (int) Tools.getTriangle(i));
             setData(1, (int) Tools.getSquare(i));
             setData(2, (int) Tools.getPentagonal(i));
             setData(3, (int) Tools.getHexagonal(i));
             setData(4, (int) Tools.getHeptagonal(i));
-            setData(5, (int) Tools.getOctagonal(i));
+            // setData(5, (int) Tools.getOctagonal(i));
         }
         System.out.println("time: " + (System.currentTimeMillis() - time) + "ms");
 
         // Search through the data.
         int res = 0;
         for (int n = 1; n < 142; n++) {
-            int t = (int) Tools.getTriangle(n);
+            int t = (int) Tools.getOctagonal(n);
             if (t >= 1000 && t < 10000) {
-                mSearched[0] = true;
+                mSearched[5] = true;
                 mFirst = getFirstTwoDigits(t);
                 res = search(t, 1);
                 if (res != 0) {
