@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 public class Euler0062 {
 
-    static HashMap<String, Pair<Long, Integer>> map = new HashMap<String, Pair<Long, Integer>>();
+    static HashMap<String, Long[]> map = new HashMap<String, Long[]>();
     static final int PERMS = 5;
 
     public static void main(String[] args) {
@@ -29,12 +29,12 @@ public class Euler0062 {
             java.util.Arrays.sort(q3ca);
             String s = Arrays.toString(q3ca);
             if(map.containsKey(s)){
-                Pair<Long, Integer> pair = map.get(s);
-                if (++pair.count == PERMS) {
+                Long[] pair = map.get(s);
+                if (++pair[1] == PERMS) {
                     candidateFound = true;
                 }
             } else {
-                map.put(s, new Pair<Long, Integer>(q3,1));
+                map.put(s, new Long[]{q3,1l});
             }
             if (candidateFound && prevLength != s.length()) {
                 search = false;
@@ -43,22 +43,52 @@ public class Euler0062 {
         }
 
         Long n = Long.MAX_VALUE;
-        for (Pair<Long, Integer> p : map.values()) {
-            if (p.count == PERMS && p.number < n) {
-                n = p.number;
+        for (Long[] p : map.values()) {
+            if (p[1] == PERMS && p[0] < n) {
+                n = p[0];
             }
         }
+        Long now = System.currentTimeMillis();
+        System.out.println("time: " + (now - time) + "ms");
         System.out.println(n);
-        System.out.println("time: " + (System.currentTimeMillis() - time) + "ms");
+
+        System.out.println("\n--- 1 ---");
+        sort(333333333333l);
+        System.out.println("\n--- 2 ---");
+        sort(9871214);
+        System.out.println("\n--- 4 ---");
+        sort(127035954683l);
+        System.out.println("\n--- 5 ---");
+        sort(999999999999l);
+
+    }
+
+    private static int[] tmp = new int[13];
+    static private int sort(long s){
+        int sorted = 0;
+        int i=0;
+        while(i<tmp.length){
+        tmp[i++] = (int) (s%10);
+        s/=10;
+        }
+        java.util.Arrays.sort(tmp);
+        for(int n: tmp){
+//            if(n==0){
+//                break;
+//            }
+            System.out.print(n+" ");
+        }
+
+        return sorted;
     }
 }
 
-class Pair<T1, T2> {
-    public Long number = 0l;
-    public Integer count = 0;
-
-    public Pair(T1 number, T2 count) {
-        this.number = (Long) number;
-        this.count = (Integer) count;
-    }
-}
+//class Pair<T1, T2> {
+//    public Long number = 0l;
+//    public Integer count = 0;
+//
+//    public Pair(T1 number, T2 count) {
+//        this.number = (Long) number;
+//        this.count = (Integer) count;
+//    }
+//}
