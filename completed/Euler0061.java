@@ -40,17 +40,26 @@ public class Euler0061 {
     private static int mFirst = 0;
 
     public static void main(String[] args) {
-        long time = System.currentTimeMillis();
+        long time = System.nanoTime();
 
-        for (int i = 1; i < 142; i++) {
+        for (int i = 45; i < 142; i++) {
             setData(0, (int) Tools.getTriangle(i));
-            setData(1, (int) Tools.getSquare(i));
-            setData(2, (int) Tools.getPentagonal(i));
-            setData(3, (int) Tools.getHexagonal(i));
-            setData(4, (int) Tools.getHeptagonal(i));
-            // setData(5, (int) Tools.getOctagonal(i));
         }
-        System.out.println("time: " + (System.currentTimeMillis() - time) + "ms");
+        for (int i = 32; i < 100; i++) {
+            setData(1, (int) Tools.getSquare(i));
+        }
+        for (int i = 26; i < 82; i++) {
+            setData(2, (int) Tools.getPentagonal(i));
+        }
+        for (int i = 23; i < 71; i++) {
+            setData(3, (int) Tools.getHexagonal(i));
+        }
+        for (int i = 21; i < 64; i++) {
+            setData(4, (int) Tools.getHeptagonal(i));
+        }
+        // Calculating this as start values for the search to minimize the paths
+        // we need to search.
+        // setData(5, (int) Tools.getOctagonal(i));
 
         // Search through the data.
         int res = 0;
@@ -67,7 +76,7 @@ public class Euler0061 {
             }
         }
         System.out.println(res);
-        System.out.println("time: " + (System.currentTimeMillis() - time) + "ms");
+        System.out.println("time: " + (System.nanoTime() - time) + "ns");
     }
 
     private static int search(int n, int depth) {
