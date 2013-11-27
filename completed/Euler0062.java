@@ -1,6 +1,6 @@
+
 package completed;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 // The cube, 41063625 (345^3), can be permuted to produce two other
@@ -13,7 +13,8 @@ import java.util.HashMap;
 
 public class Euler0062 {
 
-    static HashMap<String, Long[]> map = new HashMap<String, Long[]>();
+    static HashMap<Long, Long[]> map = new HashMap<Long, Long[]>();
+
     static final int PERMS = 5;
 
     public static void main(String[] args) {
@@ -25,21 +26,21 @@ public class Euler0062 {
         Long q3 = new Long(Long.MAX_VALUE);
         while (search) {
             q3 = (long) Math.pow(q++, 3);
-            char[] q3ca = q3.toString().toCharArray();
-            java.util.Arrays.sort(q3ca);
-            String s = Arrays.toString(q3ca);
-            if(map.containsKey(s)){
-                Long[] pair = map.get(s);
+            Long l = sort(q3);
+            if (map.containsKey(l)) {
+                Long[] pair = map.get(l);
                 if (++pair[1] == PERMS) {
                     candidateFound = true;
                 }
             } else {
-                map.put(s, new Long[]{q3,1l});
+                map.put(l, new Long[] {
+                        q3, 1l
+                });
             }
-            if (candidateFound && prevLength != s.length()) {
+            if (candidateFound && prevLength != Math.log10(l)) {
                 search = false;
             }
-            prevLength = s.length();
+            prevLength = (int) Math.log10(l);
         }
 
         Long n = Long.MAX_VALUE;
@@ -51,44 +52,22 @@ public class Euler0062 {
         Long now = System.currentTimeMillis();
         System.out.println("time: " + (now - time) + "ms");
         System.out.println(n);
-
-        System.out.println("\n--- 1 ---");
-        sort(333333333333l);
-        System.out.println("\n--- 2 ---");
-        sort(9871214);
-        System.out.println("\n--- 4 ---");
-        sort(127035954683l);
-        System.out.println("\n--- 5 ---");
-        sort(999999999999l);
-
     }
 
     private static int[] tmp = new int[13];
-    static private int sort(long s){
-        int sorted = 0;
-        int i=0;
-        while(i<tmp.length){
-        tmp[i++] = (int) (s%10);
-        s/=10;
+
+    static private long sort(long s) {
+        long sorted = 0;
+        int i = 0;
+        while (i < tmp.length) {
+            tmp[i++] = (int) (s % 10);
+            s /= 10;
         }
         java.util.Arrays.sort(tmp);
-        for(int n: tmp){
-//            if(n==0){
-//                break;
-//            }
-            System.out.print(n+" ");
+        for (int n : tmp) {
+            sorted = sorted * 10l + n;
         }
 
         return sorted;
     }
 }
-
-//class Pair<T1, T2> {
-//    public Long number = 0l;
-//    public Integer count = 0;
-//
-//    public Pair(T1 number, T2 count) {
-//        this.number = (Long) number;
-//        this.count = (Integer) count;
-//    }
-//}
